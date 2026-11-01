@@ -113,13 +113,18 @@ def _normalize_message(raw: dict[str, Any]) -> dict[str, Any] | None:
         return None
     is_group = bool(raw.get("is_group")) or username.endswith("@chatroom")
     sender_id = str(raw.get("sender_username") or "").strip()
+    sender_label = str(raw.get("sender") or "").strip()
     if is_group and not sender_id:
         # wx-cli does not filter self/system traffic: group messages without a
         # resolvable sender are our own sends or system entries. Replying to
         # those would loop, so they are dropped here.
         return None
+    if not is_group and not sender_label:
+        # Private messages carry no sender_username; an empty sender label
+        # means our own send (the peer always resolves to a display name).
+        return None
     sender_display = (
-        str(raw.get("sender") or "").strip()
+        sender_label
         or str(raw.get("sender_contact_display") or "").strip()
         or sender_id
         or "unknown"
