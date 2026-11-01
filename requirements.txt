@@ -7,9 +7,9 @@ anthropic>=0.45.0
 openai>=1.0.0
 ddgs>=9.0
 pydantic>=2.0.0
-uiautomation>=2.0
-pywin32>=300
-comtypes>=1.4
+uiautomation>=2.0; sys_platform == 'win32'
+pywin32>=300; sys_platform == 'win32'
+comtypes>=1.4; sys_platform == 'win32'
 pywebview>=5.0
 Pillow>=10.0
 pystray>=0.19.5
