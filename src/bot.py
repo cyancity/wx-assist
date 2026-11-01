@@ -1039,8 +1039,16 @@ class Bot:
                 store=store,
             )
 
+        if config.wechat_backend == "mac_wxcli":
+            from .wechat.mac_wxcli_backend import MacWxCliBackend
+            return MacWxCliBackend(
+                groups=groups,
+                poll_sec=config.poll_interval_sec,
+                store=store,
+            )
+
         else:
             raise ValueError(
                 f"Unknown WECHAT_BACKEND: '{config.wechat_backend}'. "
-                f"Supported: wcdb, mac_ui, mac_hybrid."
+                f"Supported: wcdb, mac_ui, mac_hybrid, mac_wxcli."
             )

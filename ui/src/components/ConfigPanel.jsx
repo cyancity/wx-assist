@@ -374,7 +374,8 @@ function IdentitySection({ form, update }) {
       <Field label="数据后端" hint="Windows 推荐本地数据源；macOS 推荐直连方式">
         <Select value={form.wechat_backend} onChange={v => update('wechat_backend', v)} options={[
           { value: 'wcdb', desc: '本地直连', hint: '推荐 · 本地数据源' },
-          { value: 'mac_hybrid', desc: 'macOS 直连', hint: '推荐 · 本地读取' },
+          { value: 'mac_wxcli', desc: 'macOS wx-cli', hint: '推荐 · 本地读取' },
+          { value: 'mac_hybrid', desc: 'macOS 直连', hint: '需 libWCDB.dylib' },
           { value: 'mac_ui', desc: 'macOS 界面', hint: '实验性' },
         ]} />
       </Field>
